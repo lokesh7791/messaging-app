@@ -34,7 +34,7 @@ pipeline {
                     def packageJSONVersion = packageJson.version
                     echo "${packageJSONVersion}"
                     sh "curl -u admin:12345 -X GET \'http://34.224.215.152:8081/repository/chat/chat.${packageJSONVersion}.zip\' --output chat-'${packageJSONVersion}'.zip"
-                    sh 'sudo rm -f /var/www/html/*'
+                    sh 'sudo rm -rf /var/www/html/*'
                     sh "sudo unzip -o 'chat.${packageJSONVersion}'.zip"
                     sh "sudo cp -r frontend/dist/*  var/www/html " 
 
