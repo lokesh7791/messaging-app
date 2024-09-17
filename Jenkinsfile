@@ -19,8 +19,8 @@ pipeline {
         stage('PUBLISH APP'){
             steps {
                 scrpit {
-                    def packagejson = readJSON file: 'frontend/package.json'
-                    def packageJSONVersion = packagejson.version
+                    def packageJson = readJSON file: 'frontend/package.json'
+                    def packageJSONVersion = packageJson.version
                     echo "${packageJSONVersion}"
                     sh  "zip frontend/chat.${packageJSONVersion} -r frontend/dist" 
                     sh "curl -v -u admin:12345 --upload-file webapp/chat-${packageJSONVersion}.zip http://34.224.215.15:8081/repository/chat/"               }
@@ -29,8 +29,8 @@ pipeline {
         stage ('DEPLOY APP'){
             steps{
                 scrpit {
-                    def packagejson = readJSON file: frontend/package.json
-                    def packageJSONVersion = packagejson.version
+                    def packageJson = readJSON file: 'frontend/package.json'
+                    def packageJSONVersion = packageJson.version
                     echo "${packageJSONVersion}"
                     sh "curl -u admin:12345 -X GET \'http://34.224.215.15:8081/repository/chat/chat-${packageJSONVersion}.zip\' --output chat-'${packageJSONVersion}'.zip"
                     sh 'sudo rm -f /var/www/html/*'
