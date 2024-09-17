@@ -23,8 +23,8 @@ pipeline {
                     def packageJSONVersion = packageJson.version
                     echo "${packageJSONVersion}"
                     sh  "zip ./frontend/chat.${packageJSONVersion}.zip -r ./frontend/dist" 
-                    sh "ls -l ./frontend/chat-${packageJSONVersion}.zip"
-                    sh "curl -v -u admin:12345 --upload-file ./frontend/chat-${packageJSONVersion}.zip http://34.224.215.152:8081/repository/chat/"               }
+                    sh "ls -l ./frontend/chat.${packageJSONVersion}.zip"
+                    sh "curl -v -u admin:12345 --upload-file ./frontend/chat.${packageJSONVersion}.zip http://34.224.215.152:8081/repository/chat/"               }
             }
         }
         stage ('DEPLOY APP'){
@@ -33,7 +33,7 @@ pipeline {
                     def packageJson = readJSON file: 'frontend/package.json'
                     def packageJSONVersion = packageJson.version
                     echo "${packageJSONVersion}"
-                    sh "curl -u admin:12345 -X GET \'http://34.224.215.152:8081/repository/chat/chat-${packageJSONVersion}.zip\' --output chat-'${packageJSONVersion}'.zip"
+                    sh "curl -u admin:12345 -X GET \'http://34.224.215.152:8081/repository/chat/chat.${packageJSONVersion}.zip\' --output chat-'${packageJSONVersion}'.zip"
                     sh 'sudo rm -f /var/www/html/*'
                     sh "sudo unzip -o 'chat.${packageJSONVersion}'.zip"
                     sh "sudo cp -r frontend/dist/*  var/www/html " 
