@@ -18,7 +18,7 @@ pipeline {
         }
         stage('PUBLISH APP'){
             steps {
-                scrpit {
+                script {
                     def packageJson = readJSON file: 'frontend/package.json'
                     def packageJSONVersion = packageJson.version
                     echo "${packageJSONVersion}"
@@ -28,7 +28,7 @@ pipeline {
         }
         stage ('DEPLOY APP'){
             steps{
-                scrpit {
+                script {
                     def packageJson = readJSON file: 'frontend/package.json'
                     def packageJSONVersion = packageJson.version
                     echo "${packageJSONVersion}"
