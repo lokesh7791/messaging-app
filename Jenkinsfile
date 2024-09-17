@@ -22,7 +22,8 @@ pipeline {
                     def packageJson = readJSON file: 'frontend/package.json'
                     def packageJSONVersion = packageJson.version
                     echo "${packageJSONVersion}"
-                    sh  "zip frontend/chat.${packageJSONVersion}.zip -r frontend/dist" 
+                    sh  "zip ./frontend/chat.${packageJSONVersion}.zip -r ./frontend/dist" 
+                    sh "ls -l ./frontend/chat-${packageJSONVersion}.zip"
                     sh "curl -v -u admin:12345 --upload-file ./frontend/chat-${packageJSONVersion}.zip http://34.224.215.152:8081/repository/chat/"               }
             }
         }
