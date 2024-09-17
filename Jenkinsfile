@@ -12,7 +12,7 @@ pipeline {
         stage('BUILD APP') {
             steps {
                 echo 'BUILD APP STARTED'
-                sh ' cd frontend && npm install && npn run build'
+                sh ' cd frontend && npm install && npm run build'
                 echo 'BUILD APP FINSIHED'
             }
         }
