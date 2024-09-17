@@ -19,7 +19,7 @@ pipeline {
         stage('PUBLISH APP'){
             steps {
                 scrpit {
-                    def packagejson = readJSON file: frontend/package.json
+                    def packagejson = readJSON file: 'frontend/package.json'
                     def packageJSONVersion = packagejson.version
                     echo "${packageJSONVersion}"
                     sh  "zip frontend/chat.${packageJSONVersion} -r frontend/dist" 
